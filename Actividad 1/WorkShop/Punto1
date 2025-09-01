@@ -1,0 +1,74 @@
+% Padres
+padre(abraham, herbert).
+padre(abraham, homero).
+padre(clancy, marge).
+padre(clancy, patty).
+padre(clancy, selma).
+padre(homero, bart).
+padre(homero, lisa).
+padre(homero, maggie).
+
+madre(mona, homero).
+madre(jacqueline, marge).
+madre(jacqueline, patty).
+madre(jacqueline, selma).
+madre(marge, bart).
+madre(marge, lisa).
+madre(marge, maggie).
+madre(selma, ling).
+
+% Género
+hombre(abraham).
+hombre(clancy).
+hombre(herbert).
+hombre(homero).
+hombre(bart).
+
+mujer(mona).
+mujer(jacqueline).
+mujer(marge).
+mujer(patty).
+mujer(selma).
+mujer(lisa).
+mujer(maggie).
+mujer(ling).
+
+% Abuelo / Abuela
+abuelo(Abuelo, Nieto) :-
+    padre(Abuelo, PadreOMadre),
+    (padre(PadreOMadre, Nieto); madre(PadreOMadre, Nieto)).
+
+abuela(Abuela, Nieto) :-
+    madre(Abuela, PadreOMadre),
+    (padre(PadreOMadre, Nieto); madre(PadreOMadre, Nieto)).
+
+% Hermanos / Hermanas
+hermano(Hermano, Persona) :-
+    padre(Padre, Hermano), padre(Padre, Persona),
+    madre(Madre, Hermano), madre(Madre, Persona),
+    Hermano \= Persona, hombre(Hermano).
+
+hermana(Hermana, Persona) :-
+    padre(Padre, Hermana), padre(Padre, Persona),
+    madre(Madre, Hermana), madre(Madre, Persona),
+    Hermana \= Persona, mujer(Hermana).
+
+% Tíos / Tías
+tio(Tio, Sobrino) :-
+    hermano(Tio, PadreOMadre),
+    (padre(PadreOMadre, Sobrino); madre(PadreOMadre, Sobrino)),
+    hombre(Tio).
+
+tia(Tia, Sobrino) :-
+    hermana(Tia, PadreOMadre),
+    (padre(PadreOMadre, Sobrino); madre(PadreOMadre, Sobrino)),
+    mujer(Tia).
+
+% Primos / Primas
+primo(Primo, Persona) :-
+    (padre(Padre1, Primo), hermano(Padre1, Padre2), (padre(Padre2, Persona); madre(Padre2, Persona)), hombre(Primo));
+    (madre(Madre1, Primo), hermana(Madre1, Madre2), (padre(Madre2, Persona); madre(Madre2, Persona)), hombre(Primo)).
+
+prima(Prima, Persona) :-
+    (padre(Padre1, Prima), hermano(Padre1, Padre2), (padre(Padre2, Persona); madre(Padre2, Persona)), mujer(Prima));
+    (madre(Madre1, Prima), hermana(Madre1, Madre2), (padre(Madre2, Persona); madre(Madre2, Persona)), mujer(Prima)).

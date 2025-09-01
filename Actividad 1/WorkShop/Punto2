@@ -1,0 +1,29 @@
+% HECHOS
+estadounidense(west).
+arma(misil).
+nacion(coreaDelSur).
+hostil(coreaDelSur).
+
+% West vendió misiles a Corea del Sur
+vende(west, misil, coreaDelSur).
+
+% REGLAS
+% Una persona es criminal si cumple con la condición legal
+criminal(Persona) :-
+    estadounidense(Persona),
+    vende(Persona, Arma, Nacion),
+    arma(Arma),
+    hostil(Nacion).
+
+% Un traficante estadounidense que negocia con un enemigo es criminal
+criminal(Persona) :-
+    traficante(Persona),
+    estadounidense(Persona),
+    vende(Persona, _, Nacion),
+    enemigo(Nacion, eeuu).
+
+% Toda nación hostil es enemiga de EE.UU.
+enemigo(Nacion, eeuu) :- hostil(Nacion).
+
+% Una persona es traficante de armas si vende al menos un arma
+traficante(Persona) :- vende(Persona, _, _).

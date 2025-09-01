@@ -1,0 +1,28 @@
+?- abuelo(EsElAbuelo, bart).
+EsElAbuelo = abraham ;
+EsElAbuelo = clancy.
+
+?- abuela(EsLaAbuela, lisa).
+EsLaAbuela = mona ;
+EsLaAbuela = jacqueline.
+
+
+?- hermano(EsElHermano, lisa).
+EsElHermano = bart.
+
+?- hermana(EsLaHermana, bart).
+EsLaHermana = lisa ;
+EsLaHermana = maggie.
+
+?- tio(EsElTio, maggie).
+false. % Maggie no tiene tíos varones.
+
+?- tia(EsLaTia, bart).
+EsLaTia = patty ;
+EsLaTia = selma.
+
+?- primo(EsElPrimo, lisa).
+false. % Lisa no tiene primos varones.
+
+?- prima(EsLaPrima, bart).
+EsLaPrima = ling.

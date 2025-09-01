@@ -1,0 +1,27 @@
+?- criminal(QuienEsElCriminal).
+QuienEsElCriminal = west.
+
+?- criminal(west).
+true.
+
+?- vende(QuienVende, QueArma, AQueNacion).
+QuienVende = west,
+QueArma = misil,
+AQueNacion = coreaDelSur.
+
+
+?- enemigo(QueNacion, eeuu).
+QueNacion = coreaDelSur.
+
+?- traficante(QuienEsElTraficante).
+QuienEsElTraficante = west.
+
+?- vende(QuienVende, QueArma, AQueNacion).
+% devuelve todas las ventas de armas
+
+?- criminal(QuienEsElCriminal).
+% devuelve todos los criminales
+
+?- hostil(QueNacion).
+% devuelve todas las naciones hostiles
+
