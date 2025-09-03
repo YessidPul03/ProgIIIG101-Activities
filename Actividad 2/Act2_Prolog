@@ -1,0 +1,25 @@
+conexion(vancouver,edmonton,16).
+conexion(vancouver,calgary,13).
+conexion(edmonton,saskatoon,12).
+conexion(calgary,edmonton,4).
+conexion(calgary,regina,14).
+conexion(saskatoon,calgary,9).
+conexion(saskatoon,winnipeg,20).
+conexion(regina,saskatoon,7).
+conexion(regina,winnipeg,4).
+
+existeConexion(Origen,Destino):-
+    conexion(Origen,Destino,_).
+
+conectadoDesdeyCosto(Origen,Destino,Costo):-
+    conexion(Origen,Destino,Costo).
+
+tieneAristas(Nodo) :-
+    conexion(Nodo, _, _);
+    conexion(_, Nodo, _).
+
+costoPorCiudades(X, Y, Z, CostoTotal) :-
+    conexion(X, Y, Costo1),
+    conexion(Y, Z, Costo2),
+    CostoTotal is Costo1 + Costo2.
+
