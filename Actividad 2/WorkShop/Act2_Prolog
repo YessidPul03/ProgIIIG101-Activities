@@ -23,3 +23,10 @@ costoPorCiudades(X, Y, Z, CostoTotal) :-
     conexion(Y, Z, Costo2),
     CostoTotal is Costo1 + Costo2.
 
+viaje(Origen, Destino, Costo):-
+    conexion(Origen,Destino,Costo).
+
+viaje(Origen, Destino, CostoTotal):-
+    conexion(Origen,Intermedio,Costo1),
+    viaje(Intermedio, Destino, Costo2),
+    CostoTotal is Costo1 + Costo2.
