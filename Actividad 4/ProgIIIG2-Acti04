@@ -1,0 +1,57 @@
+progenitor(clara, jose).
+progenitor(tomas, jose).
+progenitor(tomas, isabel).
+progenitor(jose, ana).
+progenitor(jose, patricia).
+progenitor(patricia, jaime).
+
+% Hechos de género
+mujer(clara).
+mujer(isabel).
+mujer(ana).
+mujer(patricia).
+
+hombre(tomas).
+hombre(jose).
+hombre(jaime).
+
+% Reglas (Ejercicio 1.3)
+es_madre(Madre) :-
+    mujer(Madre),
+    progenitor(Madre, _).
+
+es_padre(Padre) :-
+    hombre(Padre),
+    progenitor(Padre, _).
+
+es_hijo(Hijo) :-
+    hombre(Hijo),
+    progenitor(_, Hijo).
+
+hermana_de(Hermana, Persona) :-
+    mujer(Hermana),
+    progenitor(Progenitor, Hermana),
+    progenitor(Progenitor, Persona),
+    Hermana \= Persona.
+
+abuelo_de(Abuelo, Nieto) :-
+    hombre(Abuelo),
+    progenitor(Abuelo, Progenitor),
+    progenitor(Progenitor, Nieto).
+
+abuela_de(Abuela, Nieto) :-
+    mujer(Abuela),
+    progenitor(Abuela, Progenitor),
+    progenitor(Progenitor, Nieto).
+
+hermanos(A, B) :-
+    progenitor(Progenitor, A),
+    progenitor(Progenitor, B),
+    A \= B.
+
+tia(Tia, Sobrino) :-
+    mujer(Tia),
+    progenitor(Progenitor, Sobrino),
+    progenitor(Abuelo, Progenitor),
+    progenitor(Abuelo, Tia),
+    Tia \= Progenitor.
